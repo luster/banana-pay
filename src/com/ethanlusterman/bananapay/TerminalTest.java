@@ -7,14 +7,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TerminalTest {
+    private Terminal t;
 
     @Before
     public void setUp() throws Exception {
-
+        t = new Terminal();
     }
 
     @After
     public void tearDown() throws Exception {
+        t.clearCart();
 
     }
 
@@ -40,6 +42,16 @@ public class TerminalTest {
 
     @Test
     public void testVoidItem() throws Exception {
+
+    }
+
+    @Test
+    public void testClearCart() throws Exception {
+
+    }
+
+    @Test
+    public void testPrintTotal() throws Exception {
 
     }
 }

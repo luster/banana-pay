@@ -50,6 +50,8 @@ public class ItemTest {
     @Test
     public void testGetName() throws Exception {
         assertThat(item.getName(), is("A"));
+        Item i = new Item("B", 4.40);
+        assertThat(i.getName(), is("B"));
 
     }
 

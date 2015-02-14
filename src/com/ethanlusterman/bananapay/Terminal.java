@@ -44,7 +44,7 @@ public class Terminal {
         
     }
     
-    private void clearCart() {
+    public void clearCart() {
         cart.clear();
         
     }
