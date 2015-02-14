@@ -4,17 +4,26 @@ package com.ethanlusterman.bananapay;
  * Created by ethan on 2/13/15.
  */
 public class Item {
+    
     private String name;
     private double basePrice;
     private Integer volumeQuantity;
     private double volumeCost;
     
-    public Item(String name) {
+    public Item(String name, double basePrice) {
         this.name = name;
-        this.basePrice = 0;
+        this.basePrice = basePrice;
         this.volumeQuantity = Integer.MAX_VALUE;
         this.volumeCost = 0;
         
+    }
+
+    public Item(String name, double basePrice, Integer volumeQuantity, double volumeCost) {
+        this.name = name;
+        this.basePrice = basePrice;
+        this.volumeQuantity = volumeQuantity;
+        this.volumeCost = volumeCost;
+
     }
 
     public void setBasePrice(double basePrice) {
