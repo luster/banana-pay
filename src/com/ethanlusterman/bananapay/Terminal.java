@@ -46,6 +46,7 @@ public class Terminal {
     
     public void clearCart() {
         cart.clear();
+        total = 0;
         
     }
     
@@ -68,19 +69,41 @@ public class Terminal {
             
         }
         
-        updateTotal(item, itemCount);
-        printTotal();
+        updateTotal(item, itemCount-1, itemCount);
+        //printTotal();
 
     }
     
-    private void updateTotal(Item item, Integer itemCount) {
+    public void scan(String itemName, Integer itemCount) {
+        Item item = items.get(itemName);
+        if (item == null) {
+            System.out.println("Item " + itemName + " does not exist.");
+            return;
+
+        }
+
+        Integer previousItemCount = 0;
+        if (!cart.containsKey(itemName)) {
+            cart.put(itemName, itemCount);
+
+        } else {
+            previousItemCount = cart.get(itemName);
+            cart.put(itemName, previousItemCount + itemCount);
+
+        }
+
+        updateTotal(item, previousItemCount, itemCount);
+        //printTotal();
+    }
+    
+    private void updateTotal(Item item, Integer previousItemCount, Integer currentItemCount) {
         // Update total: subtract previous price from item, add current price from item
-        total = total - item.getTotalCost(itemCount-1) + item.getTotalCost(itemCount);
+        total = total - item.getTotalCost(previousItemCount) + item.getTotalCost(currentItemCount);
         
     }
     
     public void printTotal() {
-        System.out.println("Total: " + total);
+        System.out.println("Total: $" + String.format("%.2f", total));
         
     }
     
@@ -99,8 +122,8 @@ public class Terminal {
         }
         
         cart.put(itemName, cartItemCount - 1);
-        updateTotal(item, cartItemCount);
+        updateTotal(item, cartItemCount, 1);
         
-        printTotal();
+        //printTotal();
     }
 }

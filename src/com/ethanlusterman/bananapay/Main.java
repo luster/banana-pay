@@ -10,14 +10,6 @@ public class Main {
     public static void main(String[] args) {
         
         Terminal terminal = new Terminal();
-        terminal.addItem("A", 4.50);
-        terminal.setDeal("A", 4, 15.00);
-        terminal.addItem("B", 10.00);
-        terminal.scan("A");
-        terminal.scan("A");
-        terminal.scan("A");
-        terminal.scan("A");
-        terminal.scan("A");
 
         // Product Code,Price,Volume Quantity,Volume Price
         String file = "./data/items.csv";
@@ -25,13 +17,35 @@ public class Main {
         String line = "";
         String delimiter = ",";
         
+        String itemName;
+        double basePrice;
+        Integer volumeQuantity;
+        double volumeCost;
+        
         try {
             br = new BufferedReader(new FileReader(file));
             while ((line = br.readLine()) != null) {
                 String[] item = line.split(delimiter);
-                if (item.length == 2)
-                    ;
+                if (item.length < 2)
+                    continue;
 
+                itemName = item[0];
+                try {
+                    basePrice = Double.parseDouble(item[1]);
+                } catch (NumberFormatException e) {
+                    continue;
+                }
+                terminal.addItem(itemName, basePrice);
+
+                if (item.length == 4) {
+                    try {
+                        volumeQuantity = Integer.parseInt(item[2]);
+                        volumeCost = Double.parseDouble(item[3]);
+                    } catch (NumberFormatException e) {
+                        continue;
+                    }
+                    terminal.setDeal(itemName, volumeQuantity, volumeCost);
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -47,5 +61,31 @@ public class Main {
             }
         }
         
+        // Test 1
+        terminal.scan("A");
+        terminal.scan("B");
+        terminal.scan("C");
+        terminal.scan("D");
+        terminal.scan("A");
+        terminal.scan("B");
+        terminal.scan("A");
+        terminal.scan("A");
+        terminal.printTotal();
+        // Total: $32.40
+        
+        // Test 2
+        terminal.clearCart();
+        terminal.scan("C", 7);
+        terminal.printTotal();
+        // Total: $7.25
+
+        // Test 3
+        terminal.clearCart();
+        terminal.scan("A");
+        terminal.scan("B");
+        terminal.scan("C");
+        terminal.scan("D");
+        terminal.printTotal();
+        // Total: $15.40
     }
 }
