@@ -24,6 +24,18 @@ public class Terminal {
 
     }
     
+    public Item getItem(String itemName) {
+        Item item = items.get(itemName);
+        if (item == null) {
+            System.out.println("Item " + itemName + " does not exist.");
+            return null;
+
+        }
+        
+        return item;
+        
+    }
+    
     public void setBasePrice(String itemName, double basePrice) {
         Item item = items.get(itemName);
         if (item == null)
@@ -47,6 +59,12 @@ public class Terminal {
     public void clearCart() {
         cart.clear();
         total = 0;
+        
+    }
+    
+    public void clearItems() {
+        items.clear();
+        clearCart();
         
     }
     

@@ -8,11 +8,15 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-        
-        Terminal terminal = new Terminal();
 
-        // Product Code,Price,Volume Quantity,Volume Price
+        Terminal terminal = new Terminal();
         String file = "./data/items.csv";
+        loadItemData(terminal, file);
+
+    }
+    
+    public static void loadItemData(Terminal terminal, String file) {
+        // Product Code,Price,Volume Quantity,Volume Price;
         BufferedReader br = null;
         String line = "";
         String delimiter = ",";
@@ -60,32 +64,6 @@ public class Main {
                 }
             }
         }
-        
-        // Test 1
-        terminal.scan("A");
-        terminal.scan("B");
-        terminal.scan("C");
-        terminal.scan("D");
-        terminal.scan("A");
-        terminal.scan("B");
-        terminal.scan("A");
-        terminal.scan("A");
-        terminal.printTotal();
-        // Total: $32.40
-        
-        // Test 2
-        terminal.clearCart();
-        terminal.scan("C", 7);
-        terminal.printTotal();
-        // Total: $7.25
 
-        // Test 3
-        terminal.clearCart();
-        terminal.scan("A");
-        terminal.scan("B");
-        terminal.scan("C");
-        terminal.scan("D");
-        terminal.printTotal();
-        // Total: $15.40
     }
 }
