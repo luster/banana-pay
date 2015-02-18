@@ -9,12 +9,14 @@ public class Item {
     private double basePrice;
     private Integer volumeQuantity;
     private double volumeCost;
+    private String dealType; // Can be either "noDeal", "bulkRemainder", "bulkNoRemainder"
     
     public Item(String name, double basePrice) {
         this.name = name;
         this.basePrice = basePrice;
         this.volumeQuantity = Integer.MAX_VALUE;
         this.volumeCost = 0;
+        this.dealType = "noDeal";
         
     }
 
@@ -31,14 +33,30 @@ public class Item {
         
     }
 
-    public void setVolumePrice(Integer volumeQuantity, double volumeCost) {
+    public void setVolumePrice(Integer volumeQuantity, double volumeCost, String dealType) {
+        
+        if (!dealType.equals("bulkRemainder") && !dealType.equals("bulkNoRemainder")) {
+            System.out.println("Deal type " + dealType + " does not exist!");
+            return;
+        }
+        
         this.volumeQuantity = volumeQuantity;
         this.volumeCost = volumeCost;
+        this.dealType = dealType;
         
     }
     
     public double getTotalCost(Integer quantity) {
-        return (volumeCost * (quantity / volumeQuantity) + basePrice * (quantity % volumeQuantity));
+        if (dealType.equals("bulkRemainder") || dealType.equals("noDeal"))
+            return (volumeCost * (quantity / volumeQuantity) + basePrice * (quantity % volumeQuantity));
+        else if (dealType.equals("bulkNoRemainder")) {
+            if (quantity >= volumeQuantity)
+                return volumeCost * quantity;
+            else
+                return basePrice * quantity;
+        }
+        else
+            return basePrice * quantity;
         
     }
     

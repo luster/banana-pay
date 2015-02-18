@@ -55,6 +55,36 @@ public class TerminalTest {
     }
 
     @Test
+    public void testTotal4() throws Exception {
+        terminal.clearItems();
+        terminal.addItem("F", 1.00);
+        terminal.setDeal("F", 10, 0.90, "bulkNoRemainder");
+        terminal.scan("F", 10);
+        assertThat(terminal.total, is(9.00));
+
+    }
+
+    @Test
+    public void testTotal5() throws Exception {
+        terminal.clearItems();
+        terminal.addItem("F", 1.00);
+        terminal.setDeal("F", 10, 0.90, "bulkNoRemainder");
+        terminal.scan("F", 8);
+        assertThat(terminal.total, is(8.00));
+
+    }
+
+    @Test
+    public void testTotal6() throws Exception {
+        terminal.clearItems();
+        terminal.addItem("F", 1.00);
+        terminal.setDeal("F", 10, 0.90, "bulkNoRemainder");
+        terminal.scan("F", 11);
+        assertThat(terminal.total, is(9.90));
+
+    }
+
+    @Test
     public void testAddItem() throws Exception {
         terminal.addItem("A", 7.40);
         assertThat(terminal.getItem("A").getName(), is("A"));

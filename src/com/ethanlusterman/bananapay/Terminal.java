@@ -46,12 +46,12 @@ public class Terminal {
         
     }
     
-    public void setDeal(String itemName, Integer volumeQuantity, double volumeCost) {
+    public void setDeal(String itemName, Integer volumeQuantity, double volumeCost, String dealType) {
         Item item = items.get(itemName);
         if (item == null)
             return;
         
-        item.setVolumePrice(volumeQuantity, volumeCost);
+        item.setVolumePrice(volumeQuantity, volumeCost, dealType);
         items.put(itemName, item);
         
     }

@@ -32,7 +32,7 @@ public class ItemTest {
 
     @Test
     public void testSetVolumePrice() throws Exception {
-        item.setVolumePrice(4, 16.00);
+        item.setVolumePrice(4, 16.00, "bulkRemainder");
         assertThat(item.getVolumeCost(), is(16.00));
         assertThat(item.getVolumeQuantity(), is(4));
         assertThat(item.getTotalCost(4), is(16.00));
@@ -64,7 +64,7 @@ public class ItemTest {
     @Test
     public void testGetVolumeQuantity() throws Exception {
         assertThat(item.getVolumeQuantity(), is(Integer.MAX_VALUE));
-        item.setVolumePrice(5, 20.00);
+        item.setVolumePrice(5, 20.00, "bulkRemainder");
         assertThat(item.getVolumeQuantity(), is(5));
 
     }
@@ -72,7 +72,7 @@ public class ItemTest {
     @Test
     public void testGetVolumeCost() throws Exception {
         assertThat(item.getVolumeCost(), is(0.0));
-        item.setVolumePrice(5, 20.00);
+        item.setVolumePrice(5, 20.00, "bulkRemainder");
         assertThat(item.getVolumeCost(), is(20.0));
         
     }

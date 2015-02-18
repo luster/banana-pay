@@ -48,7 +48,7 @@ public class Main {
                     } catch (NumberFormatException e) {
                         continue;
                     }
-                    terminal.setDeal(itemName, volumeQuantity, volumeCost);
+                    terminal.setDeal(itemName, volumeQuantity, volumeCost, "bulkRemainder");
                 }
             }
         } catch (FileNotFoundException e) {
